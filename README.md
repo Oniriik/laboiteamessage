@@ -1,3 +1,5 @@
+# Disclaimer
+   This code is not 'Public' ready, I will rewrite it ASAP ! 
 # laboiteamessage
    Laboiteamessage is a Instagram / Twitter bot, users can send anonymous messages to people on this two platforms.<br/><br/>
    There is a website ( simple static form ) where user select the platform then input the target's @ and the message. 
