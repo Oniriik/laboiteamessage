@@ -33,7 +33,7 @@ def login():
     try:
         browser.find_element(By.XPATH,'/html/body/div[4]/div/div/button[2]').click()
         print('1/6 - Cookies accepted')
-        except:
+    except:
         print('error - Cookies')
     sleep(5)
     try:
