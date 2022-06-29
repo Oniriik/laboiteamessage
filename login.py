@@ -30,20 +30,35 @@ def initBrowser():
 
 def login():
     sleep(5)
-    browser.find_element(By.XPATH,'/html/body/div[4]/div/div/button[2]').click()
-    print('1/6 - Cookies accepted')
+    try:
+        browser.find_element(By.XPATH,'/html/body/div[4]/div/div/button[2]').click()
+        print('1/6 - Cookies accepted')
+        except:
+        print('error - Cookies')
     sleep(5)
-    browser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[1]/div/label/input').send_keys('laboiteamessage')
-    print('2/6 - User input')
+    try:
+        browser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[1]/div/label/input').send_keys('laboiteamessage')
+        print('2/6 - User input')
+    except:
+        print('error - User input')
     sleep(5)
-    browser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[2]/div/label/input').send_keys('Hemiazqsd!!592447')
-    print('3/6 - Password input')
+    try:
+        browser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[2]/div/label/input').send_keys('Hemiazqsd!!592447')
+        print('3/6 - Password input')
+    except:
+        print('error - Password input')
     sleep(5)
-    browser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[3]/button').click()
-    print('4/6 - Log in')
+    try:
+        browser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[3]/button').click()
+        print('4/6 - Log in')
+    except:
+        print('error - Log in')
     sleep(10)
-    browser.find_element(By.XPATH,'/html/body/div[1]/section/main/div/div/div/div/button').click()
-    print('5/6 - Pass auth')
+    try:
+        browser.find_element(By.XPATH,'/html/body/div[1]/section/main/div/div/div/div/button').click()
+        print('5/6 - Pass auth')
+    except:
+        print('error - Pass auth')
     sleep(10)
     try:
         browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div/div[3]/button[2]').click()
