@@ -17,8 +17,8 @@ chromeOptions = Options()
 chromeOptions.headless = False
 chromeOptions.add_argument("--disable-dev-shm-usage")
 chromeOptions.add_argument("--no-sandbox")
-chromeOptions.add_argument("--user-data-dir=/home/oniriik/.config/google-chrome/Default")
-
+chromeOptions.add_argument("--user-data-dir=/home/root/.config/google-chrome/Default")
+chromeOptions.add_argument("--headless")
 service = Service(executable_path="./chromedriver")
 browser = webdriver.Chrome(service=service, options=chromeOptions)
 
@@ -40,6 +40,9 @@ def fetchOldestPendingMessageFromDB():
         return [fetchedMessage[0]['id'],fetchedMessage[0]['target'],fetchedMessage[0]['message'],fetchedMessage[0]['social']]
     else:
         return None
+def getBotStatus():
+    status = requests.get("https://la-boite-a-message-v2-api.herokuapp.com/infos?info=bot_status&_limit=1").json()
+    return status[0]['status']
 
 def change_status(id):
     # Change desired message status to '1' meaning sent
@@ -114,7 +117,7 @@ def post_message(id,user,msg):
         browser.execute_script("select = document.getElementsByTagName('input')[3];")
         browser.execute_script("select.classList = 'selected';")
         sleep(2)
-        browser.find_element(By.CLASS_NAME, "selected").send_keys(os.path.abspath("./data/image/upload.png"))
+        browser.find_element(By.CLASS_NAME, "selected").send_keys(os.path.abspath("/root/laboiteamessage/data/image/image/upload.png"))
         print('- Image sent')
         wait()
         browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
@@ -136,14 +139,13 @@ def post_message(id,user,msg):
         change_status(id)
     except Exception as e:
         print(f"[ERROR] {e}")
-
-
-
-# initBrowser()
-# post_message('1585','tim','test')
-
-
-change_status(16)
+def stopBot():
+    while True:
+        print('stopped')
+        status = getBotStatus()
+        if status != '2':
+            break
+        sleep(60)
 initBrowser()
 while True:
     select_msg = fetchOldestPendingMessageFromDB()
@@ -157,5 +159,22 @@ while True:
         process_img(select_msg[1])
         # Post      |    ID    |     |   TARGET  |    |  MESSAGE  |
         post_message(select_msg[0],select_msg[1],select_msg[2])
-    sleep(120)
+        
+    status = getBotStatus()
+    print(status)
+    if status == '0':
+        print('Normal mode - 5mn')
+        sleep(300)
+    elif status == '1':
+        print('Slow mode - 10mn')
+        sleep(600)
+    elif status == '2':
+        stopBot()
+    elif status == '3':
+        print('Testing - 5mn')
+        sleep(300)
+    else:
+        print('error')
+        sleep(60)
+    
     
