@@ -43,7 +43,7 @@ def login():
         print('error - User input')
     sleep(5)
     try:
-        brow ser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[2]/div/label/input').send_keys('Hemiazqsd!!592447')
+        browser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[2]/div/label/input').send_keys('Hemiazqsd!!592447')
         print('3/6 - Password input')
     except:
         print('error - Password input')
