@@ -1,3 +1,4 @@
+
 # Fetch current directory 
 import os
 from PIL.Image import init
@@ -18,6 +19,7 @@ try:
     from PIL import Image,ImageFont,ImageDraw
     from selenium.webdriver.common.keys import Keys
     from selenium.webdriver.chrome.options import Options
+os.path.abspath("mydir/myfile.txt")
 
 # If any of imports are unavailable then :     
 except Exception as e:
@@ -115,7 +117,7 @@ def change_status(id):
 
 def change_status_error(id):
     # Change desired message status to '2' meaning error (emojis)
-    requests.put(f"https://la-boite-a-message.herokuapp.com/messages{id}",
+    requests.put(f"https://la-boite-a-message.herokuapp.com/messages/{id}",
     data=json.dumps({
     'status': [2]
     }),
