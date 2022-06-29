@@ -115,7 +115,6 @@ def post_message(id,user,msg):
             sleep(10)
         except:
             print('Error - get instagram')
-            continue
         try:
             browser.execute_script('document.getElementsByTagName("button")[document.getElementsByTagName("button").length-1].click()')
             sleep(5)
