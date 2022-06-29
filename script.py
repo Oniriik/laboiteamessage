@@ -120,40 +120,40 @@ def post_message(id,user,msg):
             sleep(5)
         except:
             print('Error - new post')
-            continue
+           
         try:
             browser.execute_script("select = document.getElementsByTagName('input')[3];")
             sleep(1)
         except:
             print('Error - find to classname')
-            continue
+           
         try:
             browser.execute_script("select.classList = 'selected';")
             sleep(2)
         except:
             print('Error - add class')
-            continue
+           
         try:
             browser.find_element(By.CLASS_NAME, "selected").send_keys(os.path.abspath("/root/laboiteamessage/data/image/upload.png"))
             print('- Image sent')
             wait()
         except:
             print('Error - Send image input')
-            continue
+           
         try:
             browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
             print('- Skip')
             wait()
         except:
             print('Error - 1st skip')
-            continue
+           
         try:
             browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
             print('- Skip')
             wait()
         except:
             print('Error - 2nd skip')
-            continue
+           
         try:
             browser.find_element(By.XPATH,"/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[2]/div[1]/textarea").send_keys(f"@{user} : {msg}")
             print('- Text set')
@@ -168,7 +168,7 @@ def post_message(id,user,msg):
             change_status(id)
         except:
             print('Error - post')
-            continue
+           
     except Exception as e:
         print(f"[ERROR] {e}")
 def stopBot():
