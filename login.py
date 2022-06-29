@@ -17,7 +17,7 @@ chromeOptions = Options()
 chromeOptions.headless = False
 chromeOptions.add_argument("--disable-dev-shm-usage")
 chromeOptions.add_argument("--no-sandbox")
-chromeOptions.add_argument("--user-data-dir=/home/oniriik/.config/google-chrome/Default")
+chromeOptions.add_argument("--user-data-dir=/home/root/.config/google-chrome/Default")
 chromeOptions.add_argument("--headless")
 service = Service(executable_path="./chromedriver")
 browser = webdriver.Chrome(service=service, options=chromeOptions)
@@ -43,7 +43,7 @@ def login():
         print('error - User input')
     sleep(5)
     try:
-        browser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[2]/div/label/input').send_keys('Hemiazqsd!!592447')
+        brow ser.find_element(By.XPATH,'/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[2]/div/label/input').send_keys('Hemiazqsd!!592447')
         print('3/6 - Password input')
     except:
         print('error - Password input')
