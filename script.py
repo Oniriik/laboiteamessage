@@ -117,7 +117,7 @@ def post_message(id,user,msg):
         browser.execute_script("select = document.getElementsByTagName('input')[3];")
         browser.execute_script("select.classList = 'selected';")
         sleep(2)
-        browser.find_element(By.CLASS_NAME, "selected").send_keys(os.path.abspath("/root/laboiteamessage/data/image/image/upload.png"))
+        browser.find_element(By.CLASS_NAME, "selected").send_keys(os.path.abspath("/root/laboiteamessage/data/image/upload.png"))
         print('- Image sent')
         wait()
         browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
