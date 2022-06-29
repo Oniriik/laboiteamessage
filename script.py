@@ -29,7 +29,7 @@ def initBrowser():
     sleep(5)
 
 def wait():
-    sleep(random.randint(3,5))
+    sleep(random.randint(4,7))
 
 def fetchOldestPendingMessageFromDB():
     # Call API with params : status = 0, sort = ASC, limit = 1
@@ -110,33 +110,66 @@ def post_message(id,user,msg):
         msg = remove_emoji(msg)
         print("Processing post")
         process_img(user)
-        browser.get("https://www.instagram.com/")
-        sleep(10)
-        browser.execute_script('document.getElementsByTagName("button")[document.getElementsByTagName("button").length-1].click()')
-        wait()
-        browser.execute_script("select = document.getElementsByTagName('input')[3];")
-        browser.execute_script("select.classList = 'selected';")
-        sleep(2)
-        browser.find_element(By.CLASS_NAME, "selected").send_keys(os.path.abspath("/root/laboiteamessage/data/image/upload.png"))
-        print('- Image sent')
-        wait()
-        browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
-        print('- Skip')
-        wait()
-        browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
-        print('- Skip')
-        wait()
+        try:
+            browser.get("https://www.instagram.com/")
+            sleep(10)
+        except:
+            print('Error - get instagram')
+            continue
+        try:
+            browser.execute_script('document.getElementsByTagName("button")[document.getElementsByTagName("button").length-1].click()')
+            sleep(5)
+        except:
+            print('Error - new post')
+            continue
+        try:
+            browser.execute_script("select = document.getElementsByTagName('input')[3];")
+            sleep(1)
+        except:
+            print('Error - find to classname')
+            continue
+        try:
+            browser.execute_script("select.classList = 'selected';")
+            sleep(2)
+        except:
+            print('Error - add class')
+            continue
+        try:
+            browser.find_element(By.CLASS_NAME, "selected").send_keys(os.path.abspath("/root/laboiteamessage/data/image/upload.png"))
+            print('- Image sent')
+            wait()
+        except:
+            print('Error - Send image input')
+            continue
+        try:
+            browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
+            print('- Skip')
+            wait()
+        except:
+            print('Error - 1st skip')
+            continue
+        try:
+            browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
+            print('- Skip')
+            wait()
+        except:
+            print('Error - 2nd skip')
+            continue
         try:
             browser.find_element(By.XPATH,"/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[2]/div[1]/textarea").send_keys(f"@{user} : {msg}")
             print('- Text set')
-        except Exception as e:
-            print(f"[ERROR] {e}")
+            wait()
+        except:
+            print(f"Error - bad message")
             change_status_error(id)
             return
-        wait()
-        browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
-        print('- Done')
-        change_status(id)
+        try:
+            browser.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div[1]/div/div/div[3]/div/button').click()
+            print('- Done')
+            change_status(id)
+        except:
+            print('Error - post')
+            continue
     except Exception as e:
         print(f"[ERROR] {e}")
 def stopBot():
